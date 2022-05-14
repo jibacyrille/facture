@@ -27,44 +27,25 @@ public class App
 
             Scanner sc = new Scanner(System.in);
 
-            System.out.println("Quel est le type de controller (keyboard, web, douchette)?");
-            String controllerType = sc.nextLine();
-            System.out.println("Quel est le type de service (number, prefix)?");
-            String serviceType = sc.nextLine();
-            System.out.println("Quel est le type de repository (memory, database)?");
-            String repositoryType = sc.nextLine();
+            System.out.println("Quelle est la classe de controller ?");
+            String controllerClass = sc.nextLine();
+            System.out.println("Quelle est la classe de service ?");
+            String serviceClass = sc.nextLine();
+            System.out.println("Quelle est la classe de repository ?");
+            String repositoryClass = sc.nextLine();
 
             InvoiceControllerInterface invoiceController=null;
-            switch (controllerType){
-                case "keyboard":
-                    invoiceController=new InvoiceControllerKeyboard();
-                    break;
-                case "web":
-                    invoiceController=new InvoiceControllerWeb();
-                    break;
-                case "douchette":
-                    invoiceController=new InvoiceControllerDouchette();
-                    break;
-            }
 
             InvoiceServiceInterface invoiceService=null;
-            switch (serviceType){
-                case "number":
-                    invoiceService=new InvoiceServiceNumber();
-                    break;
-                case "prefix":
-                    invoiceService=new InvoiceServicePrefix();
-                    break;
-            }
 
             InvoiceRepositoryInterface invoiceRepository=null;
-            switch (repositoryType){
-                case "memory":
-                    invoiceRepository=new InvoiceRepositoryMemory();
-                    break;
-                case "database":
-                    invoiceRepository=new InvoiceRepositoryDatabase();
-                    break;
+
+            try {
+                invoiceController = (InvoiceControllerInterface) Class.forName(controllerClass).getDeclaredConstructor().newInstance();
+                invoiceService = (InvoiceServiceInterface) Class.forName(serviceClass).getDeclaredConstructor().newInstance();
+                invoiceRepository = (InvoiceRepositoryInterface) Class.forName(repositoryClass).getDeclaredConstructor().newInstance();
+            } catch (Exception e){
+                e.printStackTrace();
             }
 
             invoiceController.setInvoiceService(invoiceService);
