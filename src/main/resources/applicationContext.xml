@@ -1,12 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans.xsd">
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean class="com.mycompany.invoise.service.InvoiceServicePrefix"/>
-    <bean class="com.mycompany.invoise.controller.InvoiceControllerWeb"/>
-    <bean class="com.mycompany.invoise.repository.InvoiceRepositoryDatabase"/>
+    <!--context:annotation-config/ -->
+
+    <context:property-placeholder location="classpath:application.properties"/>
+
+    <!--context:component-scan base-package="com.mycompany.invoise.controller.web"/>
+    <context:component-scan base-package="com.mycompany.invoise.service.prefix"/>
+    <context:component-scan base-package="com.mycompany.invoise.repository.database"/ -->
+
+    <!-- On commente temporairement les beans-->
+    <!--   <bean  class="com.mycompany.invoise.service.prefix.InvoiceServicePrefix"> -->
+
+           <!-- Ceci est supprimé et remplacé par autowire -->
+        <!-- <property name="invoiceRepository" ref="invoiceRepository"/> -->
+        <!-- /Ceci -->
+
+        <!-- Ceci est supprimé et remplacé par l'annotation @value
+            <property name="prefix" value="INV_"/>
+            <property name="lastNumber" value="112"/>
+         /Ceci -->
+
+
+    <!-- </bean>
+
+    <bean class="com.mycompany.invoise.controller.web.InvoiceControllerWeb"> -->
+
+
+        <!-- Ceci est supprimé et remplacé par autowire -->
+        <!--  <property name="invoiceService" ref="invoiceService"/> -->
+         <!-- /Ceci -->
+
+
+    <!-- </bean>
+
+     <bean class="com.mycompany.invoise.repository.memory.InvoiceRepositoryMemory"/> -->
     
 
 </beans>
